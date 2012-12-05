@@ -58,10 +58,10 @@ int main(int argc, char** argv) {
 		//if int key exists get vector as temp, add to it, remove and then insert anew
 		if (tweets_by_count.count((*it).second)) {
 				
-			//int local_key = (*it).second;
+			int local_key = (*it).second;
 				
-			//vector<string> temp_vector = *(tweets_by_count[local_key]);
-			//temp_vector.push_back("test");
+			vector<string>* temp_vector_pointer = (tweets_by_count[local_key]);
+			(*temp_vector_pointer).push_back((*it).first);
 
 			//((*it).second);
 			//vector<string> curr_vector = (*it).first;
