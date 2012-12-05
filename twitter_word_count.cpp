@@ -1,6 +1,6 @@
-#include <string>tweet_out_it
-#include <iostream>tweets_by_count
-#include <map>:
+#include <string>
+#include <iostream>
+#include <map>
 #include <fstream>
 #include <vector>
 using std::cout;
@@ -12,8 +12,8 @@ int main(int argc, char** argv) {
 	cout << "Args entered: " << argc << endl;
 	
 	if (argc!=2) {
-			cout << "Please enter text file of tweets!" << endl;
-			return 0;
+		cout << "Please enter text file of tweets!" << endl;
+		return 0;
 	}
 	
 	ofstream output_file;
@@ -21,11 +21,11 @@ int main(int argc, char** argv) {
 	
 	map <string, int> tweet_words;
 	map <string, int>::iterator it;
-	map <int, vector<string> > tweets_by_count;
-	map <int, vector<string> >::iterator tweet_out_it;
+	map <int, vector<string>* > tweets_by_count;
+	map <int, vector<string>* >::iterator tweet_out_it;
 	
-	int overall_counter;
-	int unique_counter;
+	int overall_counter = 0;
+	int unique_counter = 0;
 	
 	ifstream myfile;
 	myfile.open(argv[1]);
@@ -52,29 +52,29 @@ int main(int argc, char** argv) {
 	
 	//make a new map of count keys and string vector values
 	for (it = tweet_words.begin(); it != tweet_words.end(); it++) {
-			cout << (*it).first << "\t" << (*it).second << endl;
-			//tweets_by_count.insert(pair<int, string>((*it).second, (*it).first));
+		cout << (*it).first << "\t" << (*it).second << endl;
+		//tweets_by_count.insert(pair<int, string>((*it).second, (*it).first));
 
-			//if int key exists get vector as temp, add to it, remove and then insert anew
-			if (tweets_by_count.count((*it).second)) {
+		//if int key exists get vector as temp, add to it, remove and then insert anew
+		if (tweets_by_count.count((*it).second)) {
 				
-				//int local_key = (*it).second;
+		//int local_key = (*it).second;
 				
-				//vector<string> temp_vector = tweets_by_count[local_key];
-				//temp_vector.push_back("test");
+		//vector<string> temp_vector = tweets_by_count[local_key];
+		//temp_vector.push_back("test");
 
-				//((*it).second);
-				//vector<string> curr_vector = (*it).first;
+		//((*it).second);
+		//vector<string> curr_vector = (*it).first;
 				
-				//Must delete curent entry
+		//Must delete curent entry
 						
-			}
+		}
 		
-			else {
-				//if int key doesn't exist, insert			
-				vector<string> curr_vector;
-				curr_vector.push_back((*it).first);
-				tweets_by_count.insert(pair<int, vector<string> >((*it).second, curr_vector));	
+		else {
+			//if int key doesn't exist, insert			
+			//vector<string> curr_vector;
+			//curr_vector.push_back((*it).first);
+			//tweets_by_count.insert(pair<int, vector<string> >((*it).second, curr_vector));	
 			}
 	}
 		
@@ -84,11 +84,11 @@ int main(int argc, char** argv) {
 			//output_file << (*tweet_out_it).first << "\t" << (*tweet_out_it).second << endl;
 			output_file << (*tweet_out_it).first << " occurrences:" << endl;
 			
-			vector<string> temp_vector = (*tweet_out_it).second;
+			//vector<string> temp_vector = (*tweet_out_it).second;
 		
-			for (unsigned i=0; i<temp_vector.size() ; i++)
-				output_file << temp_vector[i] << " ";
-			output_file << '\n';
+			//for (unsigned i=0; i<temp_vector.size() ; i++)
+				//output_file << temp_vector[i] << " ";
+			//output_file << '\n';
 		;
 		
 		
