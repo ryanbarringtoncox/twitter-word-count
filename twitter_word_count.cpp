@@ -52,15 +52,15 @@ int main(int argc, char** argv) {
 	
 	//populate map of count keys and string vector values
 	for (it = tweet_words.begin(); it != tweet_words.end(); it++) {
-		cout << (*it).first << "\t" << (*it).second << endl;
+		//cout << (*it).first << "\t" << (*it).second << endl;
 		//tweets_by_count.insert(pair<int, string>((*it).second, (*it).first));
 
 		//if int key exists get vector as temp, add to it, remove and then insert anew
 		if (tweets_by_count.count((*it).second)) {
 				
-			int local_key = (*it).second;
+			//int local_key = (*it).second;
 				
-			vector<string> temp_vector = *(tweets_by_count[local_key]);
+			//vector<string> temp_vector = *(tweets_by_count[local_key]);
 			//temp_vector.push_back("test");
 
 			//((*it).second);
@@ -72,9 +72,9 @@ int main(int argc, char** argv) {
 		
 		else {
 			//if int key doesn't exist, insert			
-			vector<string> curr_vector;
-			vector<string>* curr_vector_pointer = &curr_vector;
-			curr_vector.push_back((*it).first);
+			vector<string>* curr_vector_pointer = new vector<string>;
+			//vector<string>* curr_vector_pointer = &curr_vector;
+			curr_vector_pointer->push_back((*it).first);
 			tweets_by_count.insert(pair<int, vector<string>* >((*it).second, curr_vector_pointer));	
 			}
 	}
@@ -85,11 +85,11 @@ int main(int argc, char** argv) {
 			//output_file << (*tweet_out_it).first << "\t" << (*tweet_out_it).second << endl;
 			output_file << (*tweet_out_it).first << " occurrences:" << endl;
 			
-			//vector<string> temp_vector = (*tweet_out_it).second;
+			vector<string>* temp_vector = (*tweet_out_it).second;
 		
-			//for (unsigned i=0; i<temp_vector.size() ; i++)
-				//output_file << temp_vector[i] << " ";
-			//output_file << '\n';
+			for (unsigned i=0; i<(*temp_vector).size() ; i++)
+				output_file << (*temp_vector)[i] << " ";
+			output_file << '\n';
 		;
 		
 		
