@@ -58,27 +58,24 @@ int main(int argc, char** argv) {
 			//if int key exists get vector as temp, add to it, remove and then insert anew
 			if (tweets_by_count.count((*it).second)) {
 				
-				vector<string> curr_vector;
+				//int local_key = (*it).second;
 				
-				/*while (tweets_by_count(*it).empty())
-				{
-					sum+=myvector.back();
-					myvector.pop_back();
-				}
-				*/
+				//vector<string> temp_vector = tweets_by_count[local_key];
+				//temp_vector.push_back("test");
+
 				//((*it).second);
 				//vector<string> curr_vector = (*it).first;
 				
-				//for it.first
-				
-				curr_vector.push_back((*it).first);
-				tweets_by_count.insert(pair<int, vector<string> >((*it).second, curr_vector));				
+				//Must delete curent entry
+						
 			}
 		
-			//if int key doesn't exist, insert			
-			vector<string> curr_vector;
-			curr_vector.push_back((*it).first);
-			tweets_by_count.insert(pair<int, vector<string> >((*it).second, curr_vector));				
+			else {
+				//if int key doesn't exist, insert			
+				vector<string> curr_vector;
+				curr_vector.push_back((*it).first);
+				tweets_by_count.insert(pair<int, vector<string> >((*it).second, curr_vector));	
+			}
 	}
 		
 	//pipe it
