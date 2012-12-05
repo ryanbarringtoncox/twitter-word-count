@@ -8,9 +8,12 @@ using namespace std;
 
 int main(int argc, char** argv) {
 	
+	cout << "Args entered: " << argc << endl;
+	
 	map <string, int> tweet_words;
-	map<string, int>::iterator it;
+	map <string, int>::iterator it;
 	map <int, string> tweet_words_count;
+	map <int, string>::iterator it_count;
 	
 	int overall_counter;
 	int unique_counter;
@@ -40,8 +43,14 @@ int main(int argc, char** argv) {
 	
 	//make a new map of counts with word keys
 	for (it = tweet_words.begin(); it != tweet_words.end(); it++) {
-			//cout << (*it).first << endl;
+			//cout << (*it).first << "\t" << (*it).second << endl;
 			tweet_words_count.insert(pair<int, string>((*it).second, (*it).first));
+	}
+	
+	//ofor (it_count = tweet_words_count(); it_count != tweet_words_count.endl(); it
+	
+	for (it_count = tweet_words_count.begin(); it_count != tweet_words_count.end(); it_count++) {
+			cout << (*it_count).first << "\t" << (*it_count).second << endl;
 	}
 	
 	cout << "Found: " << unique_counter << " unique words." << endl;	
