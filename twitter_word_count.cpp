@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
 		}
 	}
 	
-	//make a new map of count keys and string vector values
+	//populate map of count keys and string vector values
 	for (it = tweet_words.begin(); it != tweet_words.end(); it++) {
 		cout << (*it).first << "\t" << (*it).second << endl;
 		//tweets_by_count.insert(pair<int, string>((*it).second, (*it).first));
@@ -58,23 +58,24 @@ int main(int argc, char** argv) {
 		//if int key exists get vector as temp, add to it, remove and then insert anew
 		if (tweets_by_count.count((*it).second)) {
 				
-		//int local_key = (*it).second;
+			int local_key = (*it).second;
 				
-		//vector<string> temp_vector = tweets_by_count[local_key];
-		//temp_vector.push_back("test");
+			vector<string> temp_vector = *(tweets_by_count[local_key]);
+			//temp_vector.push_back("test");
 
-		//((*it).second);
-		//vector<string> curr_vector = (*it).first;
+			//((*it).second);
+			//vector<string> curr_vector = (*it).first;
 				
-		//Must delete curent entry
+			//Must delete curent entry
 						
 		}
 		
 		else {
 			//if int key doesn't exist, insert			
-			//vector<string> curr_vector;
-			//curr_vector.push_back((*it).first);
-			//tweets_by_count.insert(pair<int, vector<string> >((*it).second, curr_vector));	
+			vector<string> curr_vector;
+			vector<string>* curr_vector_pointer = &curr_vector;
+			curr_vector.push_back((*it).first);
+			tweets_by_count.insert(pair<int, vector<string>* >((*it).second, curr_vector_pointer));	
 			}
 	}
 		
