@@ -10,6 +10,9 @@ int main(int argc, char** argv) {
 	
 	cout << "Args entered: " << argc << endl;
 	
+	ofstream output_file;
+	output_file.open("output.txt");
+	
 	map <string, int> tweet_words;
 	map <string, int>::iterator it;
 	map <int, string> tweet_words_count;
@@ -46,12 +49,12 @@ int main(int argc, char** argv) {
 			//cout << (*it).first << "\t" << (*it).second << endl;
 			tweet_words_count.insert(pair<int, string>((*it).second, (*it).first));
 	}
-	
-	//ofor (it_count = tweet_words_count(); it_count != tweet_words_count.endl(); it
-	
-	for (it_count = tweet_words_count.begin(); it_count != tweet_words_count.end(); it_count++) {
-			cout << (*it_count).first << "\t" << (*it_count).second << endl;
+		
+	for (it_count = tweet_words_count.end(); it_count != tweet_words_count.begin(); it_count--) {
+			output_file << (*it_count).first << "\t" << (*it_count).second << endl;
+			//output_file << (*it_count).first;
 	}
+	
 	
 	cout << "Found: " << unique_counter << " unique words." << endl;	
 	cout << "Found: " << overall_counter-1 << " overall words." << endl;	
