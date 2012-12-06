@@ -9,3 +9,4 @@ test: twitter_word_count.cpp
 clean:
 	rm -f *.o;
 	rm -f test; 
+	rm -f output.txt

@@ -8,29 +8,28 @@ using std:: endl;
 using namespace std;
 
 int main(int argc, char** argv) {
-	
-	cout << "Args entered: " << argc << endl;
-	
+		
 	if (argc!=2) {
 		cout << "Please enter text file of tweets!" << endl;
 		return 0;
 	}
-	
+
+	//open output file	
 	ofstream output_file;
 	output_file.open("output.txt");
 	
 	map <string, int> tweet_words;
 	map <string, int>::iterator it;
 	map <int, vector<string>* > tweets_by_count;
-	map <int, vector<string>* >::iterator tweet_out_it;
 	
 	int overall_counter = 0;
 	int unique_counter = 0;
 	
+	//open input file
 	ifstream myfile;
 	myfile.open(argv[1]);
 	
-	//make a map of word keys with count
+	//make a map of word keys with their count
 	if (myfile.is_open()) {
 		while (!myfile.eof()) {
 			overall_counter++;
@@ -50,55 +49,37 @@ int main(int argc, char** argv) {
 		}
 	}
 	
-	//populate map of count keys and string vector values
+	//populate map of int counter keys, values of strings
 	for (it = tweet_words.begin(); it != tweet_words.end(); it++) {
-		//cout << (*it).first << "\t" << (*it).second << endl;
-		//tweets_by_count.insert(pair<int, string>((*it).second, (*it).first));
 
-		//if int key exists get vector as temp, add to it, remove and then insert anew
+		//if int key exists get vector add to it
 		if (tweets_by_count.count((*it).second)) {
-				
-			int local_key = (*it).second;
-				
-			vector<string>* temp_vector_pointer = (tweets_by_count[local_key]);
+			vector<string>* temp_vector_pointer = (tweets_by_count[(*it).second]);
 			(*temp_vector_pointer).push_back((*it).first);
-
-			//((*it).second);
-			//vector<string> curr_vector = (*it).first;
-				
-			//Must delete curent entry
-						
 		}
 		
+		//if int key doesn't exist, insert new vector	
 		else {
-			//if int key doesn't exist, insert			
 			vector<string>* curr_vector_pointer = new vector<string>;
-			//vector<string>* curr_vector_pointer = &curr_vector;
 			curr_vector_pointer->push_back((*it).first);
 			tweets_by_count.insert(pair<int, vector<string>* >((*it).second, curr_vector_pointer));	
-			}
+		}
 	}
+	
+	//reverse iterator
+	map <int, vector<string>* >::reverse_iterator rit;
 		
-	//pipe it
-	for (tweet_out_it = tweets_by_count.begin(); tweet_out_it != tweets_by_count.end(); tweet_out_it++) {
+	//pipe it to output.txt file
+	for (rit = tweets_by_count.rbegin(); rit != tweets_by_count.rend(); rit++) {
 			
-			//output_file << (*tweet_out_it).first << "\t" << (*tweet_out_it).second << endl;
-			output_file << (*tweet_out_it).first << " occurrences:" << endl;
-			
-			vector<string>* temp_vector = (*tweet_out_it).second;
-		
+			vector<string>* temp_vector = (*rit).second;
 			for (unsigned i=0; i<(*temp_vector).size() ; i++)
-				output_file << (*temp_vector)[i] << " ";
-			output_file << '\n';
-		;
-		
-		
+				output_file << (*rit).first << "\t" << (*temp_vector)[i] << endl;
 	}
 	
-	//write out map of vectors.  each line has int key followed by string of vectors
-	
-	cout << "Found: " << unique_counter << " unique words." << endl;	
-	cout << "Found: " << overall_counter << " overall words." << endl;	
+	output_file << "Args entered: " << argc << endl;
+	output_file << "Found: " << unique_counter << " unique words." << endl;	
+	output_file << "Found: " << overall_counter << " overall words." << endl;	
 	
 	return 0;
 }
