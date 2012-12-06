@@ -18,16 +18,17 @@ int main(int argc, char** argv) {
 	ofstream output_file;
 	output_file.open("output.txt");
 	
+	//open input file
+	ifstream myfile;
+	myfile.open(argv[1]);
+	
 	map <string, int> tweet_words;
 	map <string, int>::iterator it;
 	map <int, vector<string>* > tweets_by_count;
 	
 	int overall_counter = 0;
 	int unique_counter = 0;
-	
-	//open input file
-	ifstream myfile;
-	myfile.open(argv[1]);
+	double lexical_diversity;
 	
 	//make a map of word keys with their count
 	if (myfile.is_open()) {
@@ -66,20 +67,23 @@ int main(int argc, char** argv) {
 		}
 	}
 	
+	//pipe meta to output.txt file
+	output_file << "Args entered: " << argc << endl;
+	output_file << "Found: " << unique_counter << " unique words." << endl;	
+	output_file << "Found: " << overall_counter << " overall words." << endl;	
+	lexical_diversity = ((double)overall_counter)/unique_counter;
+	output_file << "Lexical Diversity: " <<  lexical_diversity << endl;
+	
 	//reverse iterator
 	map <int, vector<string>* >::reverse_iterator rit;
 		
-	//pipe it to output.txt file
+	//pipe word count reversively
 	for (rit = tweets_by_count.rbegin(); rit != tweets_by_count.rend(); rit++) {
 			
 			vector<string>* temp_vector = (*rit).second;
 			for (unsigned i=0; i<(*temp_vector).size() ; i++)
 				output_file << (*rit).first << "\t" << (*temp_vector)[i] << endl;
 	}
-	
-	output_file << "Args entered: " << argc << endl;
-	output_file << "Found: " << unique_counter << " unique words." << endl;	
-	output_file << "Found: " << overall_counter << " overall words." << endl;	
 	
 	return 0;
 }
